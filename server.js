@@ -3,7 +3,7 @@ const dotenvResult = require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-app.use(cors());
+app.use(cors("https://data.maccopypasta.com"));
 app.use(express.json());
 
 // Dynamic import of node-fetch
