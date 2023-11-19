@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>License Key Verification</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  form {
+    margin-bottom: 20px;
+  }
+  input, button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <h1>Verify License Key</h1>
+  <form id="licenseForm">
+    <label for="licenseKey">License Key:</label>
+    <input type="text" id="licenseKey" name="licenseKey" required>
+
+    <label for="inputText">Input Text:</label>
+    <input type="text" id="inputText" name="inputText" required>
+
+    <button type="submit">Submit</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('licenseForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const licenseKey = document.getElementById('licenseKey').value;
+      const inputText = document.getElementById('inputText').value;
+      const resultDiv = document.getElementById('result');
+
+      fetch('http://localhost:3000/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ licenseKey, input: inputText })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.output) {
+          resultDiv.textContent = `Result: ${data.output}`;
+        } else if (data.error) {
+          resultDiv.textContent = `Error: ${data.error}`;
+        }
+      })
+      .catch(error => {
+        resultDiv.textContent = `Error: ${error.message}`;
+      });
+    });
+  </script>
+</body>
+</html>
