@@ -23,7 +23,7 @@
   <h1>Verify License Key</h1>
   <form id="licenseForm">
     <label for="licenseKey">License Key:</label>
-    <input type="text" id="licenseKey" name="licenseKey" required>
+    <input type="text" id="licenseKey" name="licenseKey" value="D9B5CF76-5FAB44BA-A64F92A0-36A12ACC" required>
 
     <label for="inputText">Input Text:</label>
     <input type="text" id="inputText" name="inputText" required>
@@ -39,7 +39,8 @@
       const licenseKey = document.getElementById('licenseKey').value;
       const inputText = document.getElementById('inputText').value;
       const resultDiv = document.getElementById('result');
-
+    //   fetch('https://data.maccopypasta.com/verify   ', {
+        // http://localhost:3000
       fetch('http://localhost:3000/verify', {
         method: 'POST',
         headers: {
@@ -49,11 +50,8 @@
       })
       .then(response => response.json())
       .then(data => {
-        if (data.output) {
-          resultDiv.textContent = `Result: ${data.output}`;
-        } else if (data.error) {
-          resultDiv.textContent = `Error: ${data.error}`;
-        }
+        console.log(data)
+        
       })
       .catch(error => {
         resultDiv.textContent = `Error: ${error.message}`;
