@@ -10,6 +10,7 @@ import("node-fetch").then((nodeFetch) => {
   const fetch = nodeFetch.default;
 
   async function chatgpt(inputText) {
+    if (!inputText) return;
     try {
       // Move the code that requires the API key inside this function
       //   const apikey = process.env.API_KEY;
@@ -75,10 +76,7 @@ import("node-fetch").then((nodeFetch) => {
                 console.log(error);
               });
           } else {
-            res.json({
-              output: "Empty",
-              test: "test",
-            });
+            res.json({ output: "empty", test: "failed" });
           }
         } else {
           res.status(401).json({ error: "Invalid license key", value: data });
