@@ -62,17 +62,24 @@ import("node-fetch").then((nodeFetch) => {
         return response.json();
       })
       .then((data) => {
-        if (data.success && input) {
-          chatgpt(input)
-            .then((outputData) => {
-              res.json({
-                output: outputData,
-                test: "test",
+        if (data.success) {
+          if (input) {
+            chatgpt(input)
+              .then((outputData) => {
+                res.json({
+                  output: outputData,
+                  test: "test",
+                });
+              })
+              .catch((error) => {
+                console.log(error);
               });
-            })
-            .catch((error) => {
-              console.log(error);
+          } else {
+            res.json({
+              output: "Empty",
+              test: "test",
             });
+          }
         } else {
           res.status(401).json({ error: "Invalid license key", value: data });
         }
