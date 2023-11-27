@@ -1,5 +1,4 @@
 const dotenvResult = require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -63,7 +62,7 @@ import("node-fetch").then((nodeFetch) => {
         return response.json();
       })
       .then((data) => {
-        if (data.success) {
+        if (data.success && input) {
           chatgpt(input)
             .then((outputData) => {
               res.json({

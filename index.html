@@ -34,14 +34,14 @@
 
   <script>
     document.getElementById('licenseForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+      // event.preventDefault();
 
       const licenseKey = document.getElementById('licenseKey').value;
       const inputText = document.getElementById('inputText').value;
       const resultDiv = document.getElementById('result');
     //   fetch('https://data.maccopypasta.com/verify   ', {
         // http://localhost:3000
-      fetch('http://localhost:3000/verify', {
+      fetch('https://data.maccopypasta.com/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
